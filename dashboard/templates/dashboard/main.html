@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
+
 
 {% block 'body' %}
 
@@ -102,12 +104,8 @@
             <!-- form start -->
             <form method="POST" enctype="multipart/form-data"  > 
               <div class="card-body"> 
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <small id='totalrente' class="form-text text-muted"></small>
+                {% csrf_token %}
+                {% bootstrap_form form %}
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
@@ -127,7 +125,7 @@
             <div class="col-4 ">
               <ul class="nav">
             {% for category in categories|slice:'4' %}
-              <li class="nav-item ">
+              <li class="nav-item cat{{category.id}} ">
                 <a id="" class="nav-link bg-primary" href="#">{{category.name}}</a>
               </li>
             {% endfor %}
@@ -140,7 +138,7 @@
           <div class="row">
         {% for book in books %}
             <!-- الكتب -->
-                <div id="" class="col-md-4">
+                <div id="" class="col-md-4 bookhide book{{book.category.id}} book{{book.status}}">
                     <!-- Widget: user widget style 1 -->
                   <div id="" class="card card-widget widget-user ">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -150,8 +148,8 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">تعديل</a>
-                      <a class="dropdown-item" href="#">حذف</a>
+                      <a class="dropdown-item" href="{%url 'dashboard:update' book.slug %}">تعديل</a>
+                      <a class="dropdown-item" href="{%url 'dashboard:delete_book' book.slug %}">حذف</a>
                   <!-- Button trigger modal -->
                     </div>
                   </div>

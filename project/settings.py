@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     ## My Apps
     "dashboard",
     "django_summernote",
+    "bootstrap4",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

@@ -1,4 +1,5 @@
 {% load static %}
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html  lang="ar">
 <head>
@@ -27,7 +28,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Home</a>
+          <a href="{%url 'dashboard:main' %}" class="nav-link">Home</a>
         </li>
   
       </ul>
@@ -57,7 +58,7 @@
           <div class="image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Abdelrahman Gamal</a>
+            <a href="#" class="d-block">Eslam Mohamed</a>
           </div>
         </div>
   
@@ -66,10 +67,10 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
   
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{%url 'dashboard:books' %}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
-                  New Books
+                  All Books
                 </p>
               </a>
             </li>
@@ -92,13 +93,14 @@
                     </li> 
                 <form id="cat" method="POST">
                
-                    <input type="text" class="form-control">
+                    {% csrf_token %}
+                    {% bootstrap_form category_form %}
   
                     <button type="submit" class="btn btn-success">save</button>
                     <button id="backcat" class="btn btn-primary ">back</button>
                 </form>  
                {% for category in categories %}
-               <li style="cursor: pointer;" class="nav-item">
+               <li style="cursor: pointer;" class="nav-item cat{{category.id}}">
                 <a id="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{category.name}}</p>
@@ -114,19 +116,19 @@
   
             <li class="nav-header">الكتب المستعارة</li>
             
-            <li style="cursor: pointer;" class="nav-item">
+            <li style="cursor: pointer;" class="nav-item statussold">
               <a id="statusSold" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">تم بيعه</p>
               </a>
             </li>
-            <li style="cursor: pointer;" class="nav-item">
+            <li style="cursor: pointer;" class="nav-item statusrented">
               <a id="" class="nav-link">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p>تم استعارته</p>
               </a>
             </li>
-            <li style="cursor: pointer;" class="nav-item">
+            <li style="cursor: pointer;" class="nav-item statusavailable">
               <a id="" class="nav-link">
                 <i class="nav-icon far fa-circle text-info"></i>
                 <p>متاح</p>
@@ -175,6 +177,23 @@
     $('#myModal').on('shown.bs.modal', function () {
       $('#myInput').trigger('focus')
     });
+
+{% for book in books %}
+
+$(".cat{{book.category.id}}").click(function(){
+  $(".bookhide").hide()
+  $(".book{{book.category.id}}").show()
+
+});
+$(".status{{book.status}}").click(function(){
+  $(".bookhide").hide()
+  $(".book{{book.status}}").show()
+
+});
+
+{% endfor %}
+
+
 /*here i will make loop for get id category and status for contact with books */
 /*حساب اجمالي الارباح و هي عبارة عن حاصل جمع سعر الكتب عند البيع بالاضافة الى سعر استعارة الكتاب*/
   });

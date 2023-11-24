@@ -49,6 +49,10 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    def total_rental_price(self):
+        if self.rental_price_day and self.rental_period:
+            return self.rental_price_day * self.rental_period
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)

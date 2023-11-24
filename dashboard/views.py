@@ -9,11 +9,19 @@ def main(request):
     books = Book.objects.all()
     categories = Category.objects.all()
     form = BookForm()
+    all_books = Book.objects.filter(active=True).count()
+    sold_books = Book.objects.filter(status="sold").count()
+    rented_books = Book.objects.filter(status="rented").count()
+    available_books = Book.objects.filter(status="available").count()
 
     context = {
         "books": books,
         "categories": categories,
         "form": form,
+        "all_books": all_books,
+        "sold_books": sold_books,
+        "rented_books": rented_books,
+        "available_books": available_books,
     }
     if request.method == "POST":
         form_book = BookForm(request.POST, request.FILES)

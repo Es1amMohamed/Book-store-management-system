@@ -15,9 +15,8 @@
 
   <!-- في المكان ده هحط المحتوى -->
 
-
+  
   <div style="direction: rtl;" class="wrapper">
-
 
 
 
@@ -25,7 +24,7 @@
     <div   class="content-wrapper">
       <!-- Content Header (Page header) -->
   
-  
+      
       <!--الاحصائيات-->
       <div class="content">
         <div class="container-fluid">
@@ -40,7 +39,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">500</span>
+                      <span class="text-bold text-lg">{{all_books}}</span>
                       <span>اجمالي عدد الكتب</span>
                     </p>  
                   </div>
@@ -54,7 +53,14 @@
               <!-- /.card -->
             </div>
             <!-- /.col-md-6 -->
-            
+            {% for book in books %}
+            {% if  book.status == 'sold' %}
+            <p class="totalprice">{{book.price}}</p>
+            {% endif %}
+            {% if book.status == 'rented' %}
+            <p class="totalprice"> {{book.total_rental_price}}</p>
+            {% endif %}
+            {% endfor %}
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-0">
@@ -65,14 +71,14 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg">$</span><br></p>
                   </div>
                   <!-- /.d-flex -->
-  
+                  
                   <div class="position-relative mb-4">
                     <canvas id="sales-chart" height="160"></canvas>
                   </div>
-  
+                  
                   <div class="d-flex flex-row justify-content-end">
                     <span class="mr-2">
                       <i class="fas fa-square text-primary"></i> الاربح من بيع الكتب
@@ -173,8 +179,14 @@
                           <!-- /.col -->
                       <div class="col-sm-4 border-right">
                         <div class="description-block">
-                          <h5 class="description-header">${{book.price}}</h5>
-                          <span class="description-text">price</span>
+                          {% if book.price != None %}
+                            <h5 class="description-header">${{book.price}}</h5>
+                            <span class="description-text">price</span>
+                          {% endif %}
+                          {% if book.rental_price_day %}
+                          <h5 class="description-header">${{book.rental_price_day}}</h5>
+                          <span class="description-text">Rental Price</span>
+                          {% endif %}
                         </div>
                         <!-- /.description-block -->
                       </div>

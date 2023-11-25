@@ -181,9 +181,28 @@
       var salary = $(this).text()
       total += parseInt(salary)
     });
-    $("#totalsalarys").text(total)
+    $("#totalsalarys").text($("#totalsalarys").text()+total)
 });
 
+var total1 = 0;
+$('.totalrental').each(function(){
+  $(this).hide()
+  var salary1 = $(this).text()
+  total1 += parseInt(salary1)
+});
+
+$('.rental').text(total1)
+$('.rental').hide()
+
+var total2 = 0;
+$('.totalsold').each(function(){
+  $(this).hide()
+  var salary2 = $(this).text()
+  total2 += parseInt(salary2)
+});
+
+$('.sold').text(total2)
+$('.sold').hide()
 
   $(document).ready(function(){
     $('#myModal').on('shown.bs.modal', function () {
@@ -246,14 +265,14 @@ $(function () {
           backgroundColor: '#007bff',
           borderColor    : '#007bff',
           data           : [ 
-               '50',
+               $('.sold').text()
           ]
         },
         {
           backgroundColor: '#ced4da',
           borderColor    : '#ced4da',
           data           : [ 
-                '30',
+                $('.rental').text()
           ]
         }
       ]

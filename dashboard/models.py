@@ -52,6 +52,8 @@ class Book(models.Model):
     def total_rental_price(self):
         if self.rental_price_day and self.rental_period:
             return self.rental_price_day * self.rental_period
+        else:
+            return "There are no profits from borrowed books"
 
 
 class Category(models.Model):

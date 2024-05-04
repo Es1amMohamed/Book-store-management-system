@@ -32,6 +32,6 @@ This project is a web application designed for managing a bookstore, handling bo
 We welcome contributions to the development of this project. If you would like to contribute, please open a pull request, and we will review it promptly.
 ## Support
 
-For support, email contact@eslammohamed.me
+For support, email contact@eslammohamed.me or visit my website eslammohamed.me
 
 
